@@ -1,21 +1,39 @@
 pipeline {
     agent any
     environment {
-        MAVEN_HOME = "/opt/maven"  // The path where Maven will be installed
+        MAVEN_HOME = "/opt/maven"  // Path where Maven will be installed
         MAVEN_VERSION = "3.9.9"    // Specify the version of Maven to install
     }
     stages {
+        stage('Install Git') {
+            steps {
+                script {
+                    // Install Git if it’s not already installed
+                    sh """
+                        if ! git --version &>/dev/null; then
+                            echo "Installing Git..."
+                            sudo apt-get update
+                            sudo apt-get install -y git
+                        else
+                            echo "Git is already installed"
+                        fi
+                    """
+                }
+            }
+        }
         stage('Install Maven') {
             steps {
                 script {
-                        // Download and install Maven
-                        sh """
+                    // Download and install Maven
+                    sh """
+                        if [ ! -d "${MAVEN_HOME}" ]; then
                             cd /opt
                             wget https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
                             tar -xvzf apache-maven-${MAVEN_VERSION}-bin.tar.gz
                             mv apache-maven-${MAVEN_VERSION} maven
                             rm apache-maven-${MAVEN_VERSION}-bin.tar.gz
-                        """
+                        fi
+                    """
                 }
             }
         }
