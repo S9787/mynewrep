@@ -1,26 +1,13 @@
 pipeline {
     agent any
+    tools {
+        git 'Default'
+    }
     environment {
         MAVEN_HOME = "/opt/maven"  // Path where Maven will be installed
         MAVEN_VERSION = "3.9.9"    // Specify the version of Maven to install
     }
     stages {
-        stage('Install Git') {
-            steps {
-                script {
-                    // Install Git if it’s not already installed
-                    sh """
-                        if ! git --version &>/dev/null; then
-                            echo "Installing Git..."
-                            sudo apt-get update
-                            sudo apt-get install -y git
-                        else
-                            echo "Git is already installed"
-                        fi
-                    """
-                }
-            }
-        }
         stage('Install Maven') {
             steps {
                 script {
