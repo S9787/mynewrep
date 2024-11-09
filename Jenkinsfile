@@ -8,8 +8,7 @@ pipeline {
         stage('Install Maven') {
             steps {
                 script {
-                    
-                
+                        // Download and install Maven
                         sh """
                             cd /opt
                             wget https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
@@ -17,14 +16,13 @@ pipeline {
                             mv apache-maven-${MAVEN_VERSION} maven
                             rm apache-maven-${MAVEN_VERSION}-bin.tar.gz
                         """
-                    
                 }
             }
         }
         stage('Clone Repository') {
             steps {
                 // Clone the GitHub repository
-                git branch: 'main', url: 'https://github.com/S9787/mynewrep.git'
+                git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
             }
         }
         stage('Build WAR') {
@@ -45,5 +43,4 @@ pipeline {
         }
     }
 }
-
 }
