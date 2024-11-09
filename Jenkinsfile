@@ -17,9 +17,7 @@ pipeline {
                             mv apache-maven-${MAVEN_VERSION} maven
                             rm apache-maven-${MAVEN_VERSION}-bin.tar.gz
                         """
-                    } else {
-                        echo "Maven already installed."
-                    }
+                    
                 }
             }
         }
