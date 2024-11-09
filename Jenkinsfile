@@ -8,11 +8,8 @@ pipeline {
         stage('Install Maven') {
             steps {
                 script {
-                    // Check if Maven is already installed
-                    if (!fileExists("${MAVEN_HOME}/bin/mvn")) {
-                        echo "Maven not found. Installing Maven..."
-
-                        // Download and install Maven
+                    
+                
                         sh """
                             cd /opt
                             wget https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz
@@ -49,4 +46,6 @@ pipeline {
             echo 'Build failed!'
         }
     }
+}
+
 }
