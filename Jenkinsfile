@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         MAVEN_HOME = "/opt/maven"  // The path where Maven will be installed
-        MAVEN_VERSION = "3.8.7"    // Specify the version of Maven to install
+        MAVEN_VERSION = "3.9.9"    // Specify the version of Maven to install
     }
     stages {
         stage('Install Maven') {
